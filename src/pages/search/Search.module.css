@@ -1,0 +1,84 @@
+.searchPage {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-block: 8px 24px;
+}
+
+.searchPage h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.searchPage h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 12px;
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.searchField:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: var(--color-transparent);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.emptyState {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.clearSearch {
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background-color: var(--color-transparent);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.clearSearch:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}

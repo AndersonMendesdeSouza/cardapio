@@ -1,0 +1,16 @@
+.profile {
+  padding-block: 8px 24px;
+}
+
+.profile h1 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.profile p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}

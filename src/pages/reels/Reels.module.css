@@ -1,0 +1,123 @@
+.reels {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--tab-bar-height, 72px) - env(safe-area-inset-bottom, 0px));
+  height: calc(100dvh - var(--tab-bar-height, 72px) - env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  background-color: var(--color-text);
+  color: var(--color-background);
+}
+
+.reels h1 {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 0px));
+  left: 16px;
+  z-index: 1;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  pointer-events: none;
+  text-shadow: 0 1px 3px var(--color-text);
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.reel {
+  position: relative;
+  flex-shrink: 0;
+  min-width: 0;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-text);
+  object-fit: cover;
+}
+
+.video:focus-visible {
+  outline: 2px solid var(--color-background);
+  outline-offset: -4px;
+}
+
+.productInfo {
+  position: absolute;
+  right: 16px;
+  bottom: 80px;
+  left: 16px;
+  pointer-events: none;
+  text-shadow: 0 1px 3px var(--color-text);
+}
+
+.productHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.productHeading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.productInfo p,
+.videoError {
+  margin: 0;
+  color: var(--color-background);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.videoError {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  left: 16px;
+  transform: translateY(-50%);
+  text-align: center;
+  text-shadow: 0 1px 3px var(--color-text);
+}
+
+.videoError a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.demoNote {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top, 0px));
+  right: 16px;
+  z-index: 1;
+  margin: 0;
+  font-size: 12px;
+  pointer-events: none;
+  text-shadow: 0 1px 3px var(--color-text);
+}

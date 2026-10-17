@@ -1,0 +1,29 @@
+:global(body) {
+  margin: 0;
+}
+
+.layout {
+  --tab-bar-height: 72px;
+
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: 24px 16px;
+}
+
+.reelsContent {
+  max-width: none;
+  padding: 0;
+}
