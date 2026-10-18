@@ -68,9 +68,10 @@ export default function CardInitial({ onComplete }: CardInitialProps) {
           id="welcome-name"
           name="givenName"
           type="text"
-          placeholder="Ex.: Ana"
+          placeholder="Ex.: João"
           autoComplete="given-name"
           autoFocus
+          required
           maxLength={40}
           value={name}
           aria-invalid={Boolean(error)}
