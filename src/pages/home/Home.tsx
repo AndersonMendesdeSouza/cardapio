@@ -4,6 +4,9 @@ import burgerImage from '../../assets/food/burger.jpg'
 import pizzaImage from '../../assets/food/pizza.jpg'
 import { products } from '../../data/products'
 import styles from './Home.module.css'
+import CardInitial from '../../componets/cardInitial/CardInitial'
+
+const visitorStorageKey = 'cardapio:visitor-name'
 
 const categories = [
   { id: 'all', name: 'Destaques', image: null },
@@ -17,16 +20,40 @@ const priceFormatter = new Intl.NumberFormat('pt-BR', {
 })
 
 export default function Home() {
+  const [visitorName, setVisitorName] = useState<string | null>(() => {
+    try {
+      const savedName = window.localStorage.getItem(visitorStorageKey)
+      return savedName === null ? null : savedName.trim().replace(/\s+/g, ' ').slice(0, 40)
+    } catch {
+      // Sem armazenamento disponível, a apresentação continua nesta visita.
+      return null
+    }
+  })
+  const [storageNotice, setStorageNotice] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const visibleProducts = products.filter((product) => {
     return selectedCategory === 'all' || product.category === selectedCategory
   })
 
+  function handleWelcomeComplete(name: string) {
+    const cleanName = name.trim().replace(/\s+/g, ' ').slice(0, 40)
+
+    try {
+      window.localStorage.setItem(visitorStorageKey, cleanName)
+    } catch {
+      setStorageNotice('Sua escolha vale nesta visita. O navegador não permitiu salvá-la para a próxima.')
+    }
+
+    setVisitorName(cleanName)
+  }
+
   return (
     <div className={styles.home}>
+      {visitorName === null && <CardInitial onComplete={handleWelcomeComplete} />}
       <div className={styles.intro}>
-        <h2>O que vai ser hoje?</h2>
-        <p>Seu próximo favorito está aqui.</p>
+        <h2>{visitorName ? `Bateu a fome, ${visitorName}?` : 'Bateu a fome?'}</h2>
+        <p>Explore o cardápio e escolha seu favorito.</p>
+        {storageNotice && <p role="status">{storageNotice}</p>}
       </div>
 
       <div
