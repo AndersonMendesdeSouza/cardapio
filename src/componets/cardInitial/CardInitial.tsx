@@ -3,9 +3,10 @@ import styles from './CardInitital.module.css'
 
 interface CardInitialProps {
   onComplete: (name: string) => void
+  onDismiss: () => void
 }
 
-export default function CardInitial({ onComplete }: CardInitialProps) {
+export default function CardInitial({ onComplete, onDismiss }: CardInitialProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [name, setName] = useState('')
   const [error, setError] = useState('')
@@ -32,7 +33,7 @@ export default function CardInitial({ onComplete }: CardInitialProps) {
       aria-describedby="welcome-description"
       onCancel={(event) => {
         event.preventDefault()
-        onComplete('')
+        onDismiss()
       }}
     >
       <div className={styles.iconBadge} aria-hidden="true">
@@ -93,7 +94,7 @@ export default function CardInitial({ onComplete }: CardInitialProps) {
             <path d="M5 12h14m-6-6 6 6-6 6" />
           </svg>
         </button>
-        <button className={styles.skipButton} type="button" onClick={() => onComplete('')}>
+        <button className={styles.skipButton} type="button" onClick={onDismiss}>
           Agora não
         </button>
       </form>

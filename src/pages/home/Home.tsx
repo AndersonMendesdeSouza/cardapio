@@ -23,12 +23,16 @@ export default function Home() {
   const [visitorName, setVisitorName] = useState<string | null>(() => {
     try {
       const savedName = window.localStorage.getItem(visitorStorageKey)
-      return savedName === null ? null : savedName.trim().replace(/\s+/g, ' ').slice(0, 40)
+      if (!savedName) return null
+
+      const cleanName = savedName.trim().replace(/\s+/g, ' ').slice(0, 40)
+      return cleanName || null
     } catch {
       // Sem armazenamento disponível, a apresentação continua nesta visita.
       return null
     }
   })
+  const [isWelcomeDismissed, setIsWelcomeDismissed] = useState(false)
   const [storageNotice, setStorageNotice] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const visibleProducts = products.filter((product) => {
@@ -37,6 +41,7 @@ export default function Home() {
 
   function handleWelcomeComplete(name: string) {
     const cleanName = name.trim().replace(/\s+/g, ' ').slice(0, 40)
+    if (!cleanName) return
 
     try {
       window.localStorage.setItem(visitorStorageKey, cleanName)
@@ -49,7 +54,12 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      {visitorName === null && <CardInitial onComplete={handleWelcomeComplete} />}
+      {visitorName === null && !isWelcomeDismissed && (
+        <CardInitial
+          onComplete={handleWelcomeComplete}
+          onDismiss={() => setIsWelcomeDismissed(true)}
+        />
+      )}
       <div className={styles.intro}>
         <h2>{visitorName ? `Bateu a fome, ${visitorName}?` : 'Bateu a fome?'}</h2>
         <p>Explore o cardápio e escolha seu favorito.</p>
